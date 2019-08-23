@@ -1,0 +1,7 @@
+data/com.github.xpaul.desktop.in
+data/com.github.xpaul.appdata.xml.in
+data/com.github.xpaul.gschema.xml
+src/window.ui
+src/main.vala
+src/window.vala
+
