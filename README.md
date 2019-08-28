@@ -1,1 +1,1 @@
-![gStampnote. Timestamped note taking application for linux](/screenshot.png.jpg?raw=true "gStampnote. Timestamped note taking application for linux")
+![gStampnote. Timestamped note taking application for linux](/screenshot.png?raw=true "gStampnote. Timestamped note taking application for linux")
