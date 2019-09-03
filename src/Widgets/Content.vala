@@ -50,6 +50,7 @@ namespace Gstampnote.Widgets {
         Gtk.FlowBox flowbox;
         Gtk.TextView text_entry;
         Gtk.Button add_note;
+        Gtk.Label current_date;
 
         public Content() {
             day = new Gtk.Label ("");
@@ -78,7 +79,6 @@ namespace Gstampnote.Widgets {
             scroll.add(flowbox);
 
             var scrolled = new Gtk.ScrolledWindow (null, null);
-            scrolled.margin = 8;
             scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
             scrolled.height_request = 100;
 
@@ -92,17 +92,30 @@ namespace Gstampnote.Widgets {
             
             scrolled.add (text_entry);
 
-            var add_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-            add_box.pack_start(scrolled, true, true, 0);
+            add_note = new Gtk.Button.from_icon_name ("document-send");
+            current_date = new Gtk.Label(new DateTime.now().format ("%A %B %d, %Y - %T %Z"));
 
-            add_note = new Gtk.Button.from_icon_name ("list-add");
-            add_box.pack_end(add_note, false, false, 0);
+            GLib.Timeout.add (1000, () => {
+                current_date.set_label(new DateTime.now().format ("%A %B %d, %Y - %T %Z"));
+                return true;
+            });
+            
+            var entry_save_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+
+            entry_save_box.pack_start(current_date, false, true, 0);
+            entry_save_box.pack_end(add_note, false, true, 0);
+
+            var add_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+            add_box.margin = 8;
+            add_box.pack_start(scrolled, true, true, 0);
+            
+            add_box.pack_end(entry_save_box, false, false, 0);
 
             pack_start (day, false, false, 0);
             pack_start (seperator, false, false, 0);
             pack_start (scroll, true, true, 0);
             
-		    pack_end (add_box, false, false, 0);
+            pack_end (add_box, false, false, 0);
         }
 
         construct {
